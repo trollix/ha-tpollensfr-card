@@ -1,3 +1,13 @@
+
+const CARD_VERSION = '0.1';
+
+console.info(
+  `%c  TIX-POLLENS-FR-CARD \n%c  Version ${CARD_VERSION}    `,
+  'color: orange; font-weight: bold; background: black',
+  'color: white; font-weight: bold; background: dimgray'
+);
+
+
 const LitElement = Object.getPrototypeOf(
     customElements.get("ha-panel-lovelace")
   );
@@ -31,6 +41,8 @@ const LitElement = Object.getPrototypeOf(
   
     _getPollens(hass, sensor_name, above_level) {
       var res = [];
+      console.log(sensor_name);
+      
       if (typeof hass.states[`sensor.${sensor_name}`] != "undefined") {
         const data1 = hass.states[`sensor.${sensor_name}`].attributes['risk'];
         Object.keys(data1 || {}).forEach(function (key) {
