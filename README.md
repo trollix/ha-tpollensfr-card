@@ -1,62 +1,71 @@
-# tix-pollens-france
+# Pollens France (from RNSA)
 
-[![hacs_badge](https://img.shields.io/badge/HACS-Default-orange.svg)](https://github.com/hacs/integration)
+![Tix pollens FR](https://img.shields.io/github/v/release/trollix/tix-pollens-france)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-## Custom Lovelace card for pollen information in Hungary
+[![hacs_badge](https://img.shields.io/badge/HACS-Default-orange.svg?style=flat)](https://github.com/custom-components/hacs)
 
-This Lovelace custom card displays pollen information provided by Pollen Information Integration filtered based on concentration level. You will need to install first the [Pollen Information Hungary](https://github.com/amaximus/pollen_hu) integration from HACS.
+Cette carte "Lovelace custom card" affiche les données fournies par le Réseau National de Surveillance Aérobiologique (R.N.S.A.) [RNSA France](https://www.pollens.fr/) .
+Cette intégratuion est compatible HACS.
+
+## Preview
+
+![Pollen France Card](https://github.com/trollix/tix-pollens-france/blob/main/img01.png?raw=true "Pollen France Card")
+
+![Pollen France Card ](https://github.com/trollix/tix-pollens-france/blob/main/img02.png?raw=true "Pollen France Card")
 
 ### Installation
 
 The easiest way to install it is through [HACS (Home Assistant Community Store)](https://github.com/hacs/frontend),
-search for *Pollen Information* in the Frontend section and select Pollen Information for Hungary.
-If you are not using HACS, you may download plolen-hu-card.js and put it into
-homeassistant_config_dir/www/community/pollen-hu-card/ directory.
+search for *Pollen France* in the Frontend section and select "Pollens France (from RNSA)".
+If you are not using HACS, you may download tix-pollens-fr-card.js and put it into
+homeassistant_config_dir/www/community/tix-pollens-france/ directory.
 
-### Lovelace UI configuration
+### Configuration dans Lovelace UI
 
 Please add the card to the resources in configuration.yaml:
 
 ``` resources:
-  - {type: module, url: '/hacsfiles/pollen-hu-card/pollen-hu-card.js'}
+  - {type: module, url: '/hacsfiles/tix-pollens-france/tix-pollens-fr-card.js'}
 ```
+
+
 
 ### Options
 
-#### Card options
+#### Options de la carte
 
-| Name             | Type         | Required     | Default                 | Description                         |
-| ---------------- | ------------ | ------------ | ----------------------- | ----------------------------------- |
-| type             | string       | **required** |                         | `custom:pollen-hu-card`             |
-| title            | string       | optional     | `Pollens`               | title                               |
-| sensor_name      | string       | optional     | `pollen_hu`             | name of the sensor                  |
-| above_level      | integer      | optional     | `2`                     | display pollens above level (see below) |
+| Name             | Type         | Required     | Default         | Description                                        |
+| ---------------- | ------------ | ------------ | --------------- | -------------------------------------------------- |
+| type             | string       | **required** |                 | `custom:pollen-hu-card`                            |
+| title            | string       | optional     | `Pollens`       | title                                              |
+| sensor_name      | string       | optional     | `pollens2`      | HA sensor name                                     |
+| minimum_level    | integer      | optional     | `1`             | Affiche les pollens de niveau sup. à minimum_level |
 
-Value mappings for above_level (source: [ÁNTSZ](https://efop180.antsz.hu/polleninformaciok/)):
+Les valeurs sont celles fournies  par le RNSA (source: [RNSA](https://www.pollens.fr/le-reseau/les-pollens/)):
 
-| Description | Concentration level | Icon color |
+| Description | Concentration       | Couleur    |
 | ----------- | ------------------- | ---------- |
-| not present | 0                   | grey       |
-| low         | 1                   | green      |
-| medium      | 2                   | yellow     |
-| high        | 3                   | orange     |
-| very high   | 4                   | red        |
+| nul         | 0                   | gris       |
+| faible      | 1                   | vert       |
+| moyen       | 2                   | orange     |
+| élevé       | 3                   | rouge      |
 
-Please find below an example of ui-lovelace.yaml card entry:
+Voici un exemple de configuration dans le paramétrage de la carte:
 
 ```yaml
-    cards:
-      - type: custom:pollen-hu-card
-        above_level: 1
-        title: Pollenek
+    type: custom:tix-pollens-fr-card
+    above_level: 1  
+    title: Pollens
 ```
 
-Pollen information with above_level=0:
+![Pollen France Card ](https://github.com/trollix/tix-pollens-france/blob/main/img03.png?raw=true "Pollen France Card")
 
-![Pollen above_level](https://raw.githubusercontent.com/amaximus/pollen-hu-card/main/pollen0.png)
 
-## Thanks
+Niveaux du risque allergique de l'ensemble des pollens répertoriés: , mettre en configuration minimum_level=0:
 
-Thanks to all the people who have contributed!
+![Pollen France Card ](https://github.com/trollix/tix-pollens-france/blob/main/img04.png?raw=true "Pollen France Card")
 
-[![contributors](https://contributors-img.web.app/image?repo=amaximus/pollen-hu-card)](https://github.com/amaximus/pollen-hu-card/graphs/contributors)
+## Merci
+
+Merci à tous les utilisateurs de leurs remontées de problèmes et de bugs divers.

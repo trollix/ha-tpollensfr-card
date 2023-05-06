@@ -1,5 +1,5 @@
 
-const CARD_VERSION = '0.2.2';
+const CARD_VERSION = '0.3';
 
 console.info(
   `%c  TIX-POLLENS-FR-CARD \n%c  Version ${CARD_VERSION}    `,
