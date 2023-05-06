@@ -32,7 +32,7 @@ const LitElement = Object.getPrototypeOf(
     _getPollens(hass, sensor_name, above_level) {
       var res = [];
       if (typeof hass.states[`sensor.${sensor_name}`] != "undefined") {
-        const data1 = hass.states[`sensor.${sensor_name}`].attributes['pollens'];
+        const data1 = hass.states[`sensor.${sensor_name}`].attributes['risk'];
         Object.keys(data1 || {}).forEach(function (key) {
           if ( parseInt(data1[key].value, 10) > above_level ) {
             res.push({
@@ -48,7 +48,7 @@ const LitElement = Object.getPrototypeOf(
     setConfig(config) {
       const defaultConfig = {
         'no_pollens_label': 'No pollens',
-        'sensor_name': 'pollen_hu',
+        'sensor_name': 'pollens2',
         'above_level': 2,
         'title': 'Pollens',
       }
