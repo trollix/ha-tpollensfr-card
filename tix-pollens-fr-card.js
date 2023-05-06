@@ -93,7 +93,7 @@ const LitElement = Object.getPrototypeOf(
     renderPollen(pollen) {
       return html
       `
-        <div class="inpollen"><ha-icon icon="${icon}" class="${pollen.concentration} levelicon"></ha-icon>
+        <div class="inpollen"><ha-icon icon="${this.config.sensor_name}" class="${pollen.concentration} levelicon"></ha-icon>
         ${pollen.name}</div>
       `;
     }
