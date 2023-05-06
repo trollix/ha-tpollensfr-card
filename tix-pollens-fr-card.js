@@ -129,16 +129,16 @@ const LitElement = Object.getPrototypeOf(
         color: green;
       }
       .level2 {
-        color: yellow;
+        color: orange;
       }
       .level3 {
-        color: orange;
+        color: red;
       }
       .level4 {
         color: red;
       }
       .levelicon {
-        --mdc-icon-size: 2.5em;
+        --mdc-icon-size: 2em;
       }
       .no-pollens {
         margin-left: 1.4em;
