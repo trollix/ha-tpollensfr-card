@@ -49,8 +49,8 @@ const LitElement = Object.getPrototypeOf(
         Object.keys(data1 || {}).forEach(function (key) {
           if ( parseInt(data1[key].value, 10) > above_level ) {
             res.push({
-              name: data1[key].name,
-              concentration: "level" + data1[key].value,
+              name: data1[key].pollenName,
+              concentration: "level" + data1[key].level,
             });
           }
         });
