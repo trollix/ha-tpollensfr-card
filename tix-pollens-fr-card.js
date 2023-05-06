@@ -42,9 +42,11 @@ const LitElement = Object.getPrototypeOf(
     _getPollens(hass, sensor_name, above_level) {
       var res = [];
       console.log(sensor_name);
-      
+
       if (typeof hass.states[`sensor.${sensor_name}`] != "undefined") {
+        console.log("oui");
         const data1 = hass.states[`sensor.${sensor_name}`].attributes['risk'];
+        console.log(data1);
         Object.keys(data1 || {}).forEach(function (key) {
           if ( parseInt(data1[key].value, 10) > above_level ) {
             res.push({
