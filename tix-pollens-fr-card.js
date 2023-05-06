@@ -45,7 +45,7 @@ const LitElement = Object.getPrototypeOf(
 
       if (typeof hass.states[`sensor.${sensor_name}`] != "undefined") {
         console.log("oui");
-        const data1 = hass.states[`sensor.${sensor_name}`].attributes['risk'];
+        const data1 = hass.states[`sensor.${sensor_name}`].attributes['risks'];
         console.log(data1);
         Object.keys(data1 || {}).forEach(function (key) {
           if ( parseInt(data1[key].value, 10) > above_level ) {
