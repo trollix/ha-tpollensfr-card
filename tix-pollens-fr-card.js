@@ -1,5 +1,5 @@
 
-const CARD_VERSION = '0.1';
+const CARD_VERSION = '0.2';
 
 console.info(
   `%c  TIX-POLLENS-FR-CARD \n%c  Version ${CARD_VERSION}    `,
@@ -41,13 +41,12 @@ const LitElement = Object.getPrototypeOf(
   
     _getPollens(hass, sensor_name, above_level) {
       var res = [];
-      console.log(sensor_name);
 
       if (typeof hass.states[`sensor.${sensor_name}`] != "undefined") {
         const data1 = hass.states[`sensor.${sensor_name}`].attributes['risks'];
-        console.log(data1);
+        //console.log(data1);
         Object.keys(data1 || {}).forEach(function (key) {
-          if ( parseInt(data1[key].level, 10) > above_level ) {
+          if ( parseInt(data1[key].level, 10) >= above_level ) {
             res.push({
               name: data1[key].pollenName,
               concentration: "level" + data1[key].level,
@@ -62,8 +61,9 @@ const LitElement = Object.getPrototypeOf(
       const defaultConfig = {
         'no_pollens_label': 'No pollens',
         'sensor_name': 'pollens2',
-        'above_level': 2,
+        'above_level': 1,
         'title': 'Pollens',
+        'icon': 'mdi:brightness-1'
       }
   
       this.config = {
@@ -93,7 +93,7 @@ const LitElement = Object.getPrototypeOf(
     renderPollen(pollen) {
       return html
       `
-        <div class="inpollen"><ha-icon icon="mdi:blur" class="${pollen.concentration} levelicon"></ha-icon>
+        <div class="inpollen"><ha-icon icon="${config.icon}" class="${pollen.concentration} levelicon"></ha-icon>
         ${pollen.name}</div>
       `;
     }
