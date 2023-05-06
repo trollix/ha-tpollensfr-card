@@ -1,5 +1,5 @@
 
-const CARD_VERSION = '0.2';
+const CARD_VERSION = '0.2.2';
 
 console.info(
   `%c  TIX-POLLENS-FR-CARD \n%c  Version ${CARD_VERSION}    `,
@@ -93,7 +93,7 @@ const LitElement = Object.getPrototypeOf(
     renderPollen(pollen) {
       return html
       `
-        <div class="inpollen"><ha-icon icon="${this.config.sensor_name}" class="${pollen.concentration} levelicon"></ha-icon>
+        <div class="inpollen"><ha-icon icon="${this.config.icon}" class="${pollen.concentration} levelicon"></ha-icon>
         ${pollen.name}</div>
       `;
     }
