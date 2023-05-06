@@ -63,7 +63,7 @@ const LitElement = Object.getPrototypeOf(
         'sensor_name': 'pollens2',
         'above_level': 1,
         'title': 'Pollens',
-        'icon': 'mdi:brightness-1'
+        'icon': 'mdi:square'
       }
   
       this.config = {
@@ -117,10 +117,11 @@ const LitElement = Object.getPrototypeOf(
         width: auto;
       }
       .inpollen {
-         margin: 0px 15px 0px 15px;
-         padding: 0px 5px 0px 5px;
+         margin: 0px 0px 0px 15px;
+         padding: 1px 0px 0px 0px;
          float: left;
          position: relative;
+         width: 125px;
       }
       .level0 {
         color: grey;
