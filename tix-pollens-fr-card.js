@@ -44,7 +44,6 @@ const LitElement = Object.getPrototypeOf(
       console.log(sensor_name);
 
       if (typeof hass.states[`sensor.${sensor_name}`] != "undefined") {
-        console.log("oui");
         const data1 = hass.states[`sensor.${sensor_name}`].attributes['risks'];
         console.log(data1);
         Object.keys(data1 || {}).forEach(function (key) {
@@ -62,7 +61,7 @@ const LitElement = Object.getPrototypeOf(
     setConfig(config) {
       const defaultConfig = {
         'no_pollens_label': 'No pollens',
-        'sensor_name': 'pollens2',
+        'sensor_name': 'pollen_hu',
         'above_level': 2,
         'title': 'Pollens',
       }
