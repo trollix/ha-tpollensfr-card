@@ -47,7 +47,7 @@ const LitElement = Object.getPrototypeOf(
         const data1 = hass.states[`sensor.${sensor_name}`].attributes['risks'];
         console.log(data1);
         Object.keys(data1 || {}).forEach(function (key) {
-          if ( parseInt(data1[key].value, 10) > above_level ) {
+          if ( parseInt(data1[key].level, 10) > above_level ) {
             res.push({
               name: data1[key].pollenName,
               concentration: "level" + data1[key].level,
