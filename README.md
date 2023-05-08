@@ -29,8 +29,6 @@ Please add the card to the resources in configuration.yaml:
   - {type: module, url: '/hacsfiles/tix-pollens-france/tix-pollens-fr-card.js'}
 ```
 
-
-
 ### Options
 
 #### Options de la carte
@@ -60,7 +58,6 @@ Voici un exemple de configuration dans le paramétrage de la carte:
 ```
 
 ![Pollen France Card ](https://github.com/trollix/tix-pollens-france/blob/main/img03.png?raw=true "Pollen France Card")
-
 
 Niveaux du risque allergique de l'ensemble des pollens répertoriés: , mettre en configuration minimum_level=0:
 
