@@ -5,7 +5,7 @@ import {
 } from "https://unpkg.com/lit-element@2.0.1/lit-element.js?module";
 
 
-const CARD_VERSION = '0.3.4';
+const CARD_VERSION = '0.3.x';
 
 console.info(
   `%c  TIX-POLLENS-FR-CARD \n%c  Version ${CARD_VERSION}    `,
@@ -75,7 +75,7 @@ class TixPollensFRCard extends LitElement {
     if (!this.config || !this.hass) {
       return html``;
     }
-  
+    console.log('pollens fr')
     const pollens = this._getPollens(this.hass, this.config.sensor_name, this.config.above_level);
     return html`
       <ha-card header="${this.config.title}">
