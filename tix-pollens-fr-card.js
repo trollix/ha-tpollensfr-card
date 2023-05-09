@@ -5,7 +5,7 @@ import {
 } from "https://unpkg.com/lit-element@2.0.1/lit-element.js?module";
 
 
-const CARD_VERSION = '0.3.3';
+const CARD_VERSION = '0.3.4';
 
 console.info(
   `%c  TIX-POLLENS-FR-CARD \n%c  Version ${CARD_VERSION}    `,
