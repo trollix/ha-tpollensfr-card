@@ -75,7 +75,7 @@ class TixPollensFRCard extends LitElement {
     if (!this.config || !this.hass) {
       return html``;
     }
-    console.log('pollens fr')
+    //console.log('pollens fr')
     const pollens = this._getPollens(this.hass, this.config.sensor_name, this.config.above_level);
     return html`
       <ha-card header="${this.config.title}">
