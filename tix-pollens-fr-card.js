@@ -1,3 +1,10 @@
+//import { html, css, LitElement } from "https://unpkg.com/lit?module";
+import {
+  LitElement,
+  html,
+  css,
+} from "https://unpkg.com/lit-element@2.0.1/lit-element.js?module";
+
 
 const CARD_VERSION = '0.3';
 
@@ -7,13 +14,14 @@ console.info(
   'color: white; font-weight: bold; background: dimgray'
 );
 
-
+/*
 const LitElement = Object.getPrototypeOf(
     customElements.get("ha-panel-lovelace")
   );
   const html = LitElement.prototype.html;
   const css = LitElement.prototype.css;
-  
+*/
+
   function hasConfigOrEntityChanged(element, changedProps) {
     if (changedProps.has("config")) {
       return true;
