@@ -2,7 +2,7 @@ import {
   LitElement,
   html,
   css,
-} from "https://unpkg.com/lit-element@2.0.1/lit-element.js?module";
+} from "https://unpkg.com/lit-element@3.3.2/lit-element.js?module";
 
 
 const CARD_VERSION = '0.3.x';
@@ -79,9 +79,9 @@ class TixPollensFRCard extends LitElement {
     const pollens = this._getPollens(this.hass, this.config.sensor_name, this.config.above_level);
     return html`
       <ha-card header="${this.config.title}">
-          <div id="attributes">
+          <div id="tixpollenfr">
           ${pollens.length > 0
-            ? html`<div class="pollen">${pollens.map(pollen => this.renderPollen(pollen))}</div>`
+            ? html`<div class="ok-pollen">${pollens.map(pollen => this.renderPollen(pollen))}</div>`
             : html`<div class="no-pollen">${this.config.no_pollens_label}</div>`
           }
           </div>
@@ -92,7 +92,7 @@ class TixPollensFRCard extends LitElement {
   renderPollen(pollen) {
     return html
     `
-      <div class="inpollen"><ha-icon icon="${this.config.icon}" class="${pollen.concentration} levelicon"></ha-icon>
+      <div class="in-pollen"><ha-icon icon="${this.config.icon}" class="${pollen.concentration} levelicon"></ha-icon>
       ${pollen.name}</div>
     `;
   }
@@ -103,19 +103,19 @@ class TixPollensFRCard extends LitElement {
   
   static get styles() {
     return css`
-    #attributes {
+    #tixpollenfr {
       margin-top: 0.4em;
       padding-bottom: 0.8em;
       display: flex;
     }
-    .pollen {
+    .ok-pollen {
       margin-left: 2em;
       margin-right: 2em;
       margin: auto;
       display: float;
       width: auto;
     }
-    .inpollen {
+    .in-pollen {
        margin: 0px 0px 0px 15px;
        padding: 1px 0px 0px 0px;
        float: left;
