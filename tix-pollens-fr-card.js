@@ -1,14 +1,11 @@
-import {
-  LitElement,
-  html,
-  css,
-} from "https://unpkg.com/lit-element@3.3.2/lit-element.js?module";
+const LitElement = Object.getPrototypeOf(customElements.get("ha-panel-lovelace"));
+const html = LitElement.prototype.html;
+const css = LitElement.prototype.css;
 
-
-const CARD_VERSION = '0.3.x';
+const CARD_VERSION = '0.3.7';
 
 console.info(
-  `%c  TIX-POLLENS-FR-CARD \n%c  Version ${CARD_VERSION}    `,
+  `%c  TIX-POLLENS-FR-CARD  %c  Version ${CARD_VERSION}    `,
   'color: orange; font-weight: bold; background: black',
   'color: white; font-weight: bold; background: dimgray'
 );
