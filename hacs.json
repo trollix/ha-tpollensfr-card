@@ -1,7 +1,7 @@
 {
     "name": "Pollens - France",
     "content_in_root": "true",
-    "filename": "tix-pollens-fr-card.js",
+    "filename": "tpollensfr-card.js",
     "render_readme": "true",
     "country": ["FR"]
   }

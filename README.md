@@ -1,6 +1,6 @@
 # Pollens France (from RNSA)
 
-![Tix pollens FR](https://img.shields.io/github/v/release/trollix/tix-pollens-france)
+![Tix pollens FR](https://img.shields.io/github/v/release/trollix/ha-tpollensfr-card)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 [![hacs_badge](https://img.shields.io/badge/HACS-Default-orange.svg?style=flat)](https://github.com/custom-components/hacs)
@@ -10,15 +10,15 @@ Cette intégratuion est compatible HACS.
 
 ## Preview
 
-![Pollen France Card](https://github.com/trollix/tix-pollens-france/blob/main/img01.png?raw=true "Pollen France Card")
+![Pollen France Card](https://github.com/trollix/ha-tpollensfr-card/blob/main/img01.png?raw=true "Pollen France Card")
 
-![Pollen France Card ](https://github.com/trollix/tix-pollens-france/blob/main/img02.png?raw=true "Pollen France Card")
+![Pollen France Card ](https://github.com/trollix/ha-tpollensfr-card/blob/main/img02.png?raw=true "Pollen France Card")
 
 ### Installation
 
 The easiest way to install it is through [HACS (Home Assistant Community Store)](https://github.com/hacs/frontend),
 search for *Pollen France* in the Frontend section and select "Pollens France (from RNSA)".
-If you are not using HACS, you may download tix-pollens-fr-card.js and put it into
+If you are not using HACS, you may download tpollensfr-card.js and put it into
 homeassistant_config_dir/www/community/tix-pollens-france/ directory.
 
 ### Configuration dans Lovelace UI
@@ -26,7 +26,7 @@ homeassistant_config_dir/www/community/tix-pollens-france/ directory.
 Please add the card to the resources in configuration.yaml:
 
 ``` resources:
-  - {type: module, url: '/hacsfiles/tix-pollens-france/tix-pollens-fr-card.js'}
+  - {type: module, url: '/hacsfiles/ha-tpollensfr-cartd/tpollensfr-card.js'}
 ```
 
 ### Options
@@ -35,7 +35,7 @@ Please add the card to the resources in configuration.yaml:
 
 | Name             | Type         | Required     | Default         | Description                                        |
 | ---------------- | ------------ | ------------ | --------------- | -------------------------------------------------- |
-| type             | string       | **required** |                 | `custom:pollen-hu-card`                            |
+| type             | string       | **required** |                 | `custom:tpollensfr-card`                            |
 | title            | string       | optional     | `Pollens`       | title                                              |
 | sensor_name      | string       | optional     | `pollens2`      | HA sensor name                                     |
 | minimum_level    | integer      | optional     | `1`             | Affiche les pollens de niveau sup. à minimum_level |
@@ -57,11 +57,11 @@ Voici un exemple de configuration dans le paramétrage de la carte:
     title: Pollens
 ```
 
-![Pollen France Card ](https://github.com/trollix/tix-pollens-france/blob/main/img03.png?raw=true "Pollen France Card")
+![Pollen France Card ](https://github.com/trollix/ha-tpollensfr-card/blob/main/img03.png?raw=true "Pollen France Card")
 
 Niveaux du risque allergique de l'ensemble des pollens répertoriés: , mettre en configuration minimum_level=0:
 
-![Pollen France Card ](https://github.com/trollix/tix-pollens-france/blob/main/img04.png?raw=true "Pollen France Card")
+![Pollen France Card ](https://github.com/trollix/ha-tpollensfr-card/blob/main/img04.png?raw=true "Pollen France Card")
 
 ## Merci
 
