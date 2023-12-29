@@ -2,12 +2,12 @@ const LitElement = Object.getPrototypeOf(customElements.get("ha-panel-lovelace")
 const html = LitElement.prototype.html;
 const css = LitElement.prototype.css;
 
-const CARD_VERSION = '0.3.7';
+const CARD_VERSION = '0.4.0';
 
 console.info(
-  `%c  TIX-POLLENS-FR-CARD  %c  Version ${CARD_VERSION}    `,
-  'color: orange; font-weight: bold; background: black',
-  'color: white; font-weight: bold; background: dimgray'
+  `%c  TPOLLENSFR-CARD  %c  Version ${CARD_VERSION}  `,
+  'color: white; font-weight: bold; background: crimson',
+  'color: #000; font-weight: bold; background: #ddd',
 );
 
 function hasConfigOrEntityChanged(element, changedProps) {
