@@ -2,7 +2,7 @@ const LitElement = Object.getPrototypeOf(customElements.get("ha-panel-lovelace")
 const html = LitElement.prototype.html;
 const css = LitElement.prototype.css;
 
-const CARD_VERSION = '0.4.0';
+const CARD_VERSION = '0.4.1';
 
 console.info(
   `%c  TPOLLENSFR-CARD  %c  Version ${CARD_VERSION}  `,
@@ -149,7 +149,7 @@ customElements.define('tpollensfr-card', TPollensFRCard);
 // Puts card into the UI card picker dialog
 (window).customCards = (window).customCards || [];
 (window).customCards.push({
-  type: 'tix-pollens-fr-card',
+  type: 'tpollensfr-card',
   name: 'France Pollens card',
   preview: true,
   description: 'This Lovelace custom card displays pollen information provided by French networks of pollens.',
