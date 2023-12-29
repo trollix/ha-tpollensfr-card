@@ -26,7 +26,7 @@ function hasConfigOrEntityChanged(element, changedProps) {
   return true;
 }
   
-class TixPollensFRCard extends LitElement {
+class TPollensFRCard extends LitElement {
   
   static get properties() {
     return {
@@ -144,7 +144,7 @@ class TixPollensFRCard extends LitElement {
   }
 }
   
-customElements.define('tix-pollens-fr-card', TixPollensFRCard);
+customElements.define('tpollensfr-card', TPollensFRCard);
   
 // Puts card into the UI card picker dialog
 (window).customCards = (window).customCards || [];
