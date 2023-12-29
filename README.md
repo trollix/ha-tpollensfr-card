@@ -26,7 +26,7 @@ homeassistant_config_dir/www/community/tix-pollens-france/ directory.
 Please add the card to the resources in configuration.yaml:
 
 ``` resources:
-  - {type: module, url: '/hacsfiles/ha-tpollensfr-cartd/tpollensfr-card.js'}
+  - {type: module, url: '/hacsfiles/ha-tpollensfr-card/tpollensfr-card.js'}
 ```
 
 ### Options
