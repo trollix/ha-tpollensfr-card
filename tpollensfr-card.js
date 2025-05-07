@@ -1,170 +1,120 @@
+// tpollensfr-card.js amélioré
 const LitElement = Object.getPrototypeOf(customElements.get("ha-panel-lovelace"));
 const html = LitElement.prototype.html;
 const css = LitElement.prototype.css;
 
-const CARD_VERSION = '0.5.1';
+const CARD_VERSION = '0.5.2';
 
 console.info(
   `%c  TPOLLENSFR-CARD  %c  Version ${CARD_VERSION}  `,
   'color: white; font-weight: bold; background: crimson',
-  'color: #000; font-weight: bold; background: #ddd',
+  'color: #000; font-weight: bold; background: #ddd'
 );
 
-function hasConfigOrEntityChanged(element, changedProps) {
-  if (changedProps.has("config")) {
-    return true;
-  }
-  
-  const oldHass = changedProps.get("hass");
-  if (oldHass) {
-    return (
-      oldHass.states[element.config.entity] !==
-        element.hass.states[element.config.entity]
-    );
-  }
-  
-  return true;
-}
-  
 class TPollensFRCard extends LitElement {
-  
   static get properties() {
     return {
       config: {},
       hass: {},
     };
   }
-  
-_getPollens(hass, sensor_name, above_level) {
-  const res = [];
-  const entity = hass.states[`sensor.${sensor_name}`];
 
-  if (!entity) {
-    console.warn("TPollensFR: sensor not found:", sensor_name);
-    return res;
-  }
-
-  const today = entity.attributes?.today;
-  if (!today) {
-    console.warn("TPollensFR: no 'today' data in attributes");
-    return res;
-  }
-
-  const pollens = today.pollens || {};
-  //console.log("TPollensFR: today.pollens =", pollens);
-
-  Object.entries(pollens).forEach(([name, level]) => {
-    if (parseInt(level, 10) >= above_level) {
-      res.push({
-        name: name,
-        concentration: "level" + level,
-      });
-    }
-  });
-
-  //console.log("TPollensFR: pollens selected =", res);
-  return res;
-}
-
-  
   setConfig(config) {
     const defaultConfig = {
-      'no_pollens_label': 'No pollens',
-      'sensor_name': 'pollens2',
-      'above_level': 1,
-      'title': 'Pollens',
-      'icon': 'mdi:square'
-    }
-  
-    this.config = {
-      ...defaultConfig,
-      ...config
+      no_pollens_label: 'Aucun pollen significatif',
+      sensor_name: 'pollens_fr_pessac',
+      above_level: 1,
+      title: 'Pollens',
+      icon: 'mdi:leaf'
     };
+    this.config = { ...defaultConfig, ...config };
   }
-  
+
+  _getPollens(hass, sensor_name, above_level) {
+    const pollens = [];
+    const sensor = hass.states[`sensor.${sensor_name}`];
+    if (!sensor) return pollens;
+
+    const today = sensor.attributes?.today?.pollens || {};
+    Object.entries(today).forEach(([name, level]) => {
+      if (parseInt(level, 10) >= above_level) {
+        pollens.push({ name, level });
+      }
+    });
+
+    pollens.sort((a, b) => b.level - a.level); // Tri décroissant
+    return pollens;
+  }
+
   render() {
-    if (!this.config || !this.hass) {
-      return html``;
-    }
-    //console.log('tpollens_fr_pessac')
+    if (!this.config || !this.hass) return html``;
+
     const pollens = this._getPollens(this.hass, this.config.sensor_name, this.config.above_level);
+
     return html`
       <ha-card header="${this.config.title}">
-          <div id="tixpollenfr">
+        <div id="tixpollenfr">
           ${pollens.length > 0
-            ? html`<div class="ok-pollen">${pollens.map(pollen => this.renderPollen(pollen))}</div>`
+            ? html`<div class="ok-pollen">
+                ${pollens.map(p => html`
+                  <div class="pollen-entry level${p.level}">
+                    <div class="badge"></div>
+                    <span class="pollen-name">${p.name}</span>
+                  </div>
+                `)}
+              </div>`
             : html`<div class="no-pollen">${this.config.no_pollens_label}</div>`
           }
-          </div>
+        </div>
       </ha-card>
     `;
   }
-  
-  renderPollen(pollen) {
-    return html
-    `
-      <div class="in-pollen"><ha-icon icon="${this.config.icon}" class="${pollen.concentration} levelicon"></ha-icon>
-      ${pollen.name}</div>
-    `;
-  }
-  
+
   getCardSize() {
-    return this.config.entities.length + 1;
+    return 1;
   }
-  
+
   static get styles() {
     return css`
-    #tixpollenfr {
-      margin-top: 0.4em;
-      padding-bottom: 0.8em;
-      display: flex;
-    }
-    .ok-pollen {
-      margin-left: 2em;
-      margin-right: 2em;
-      margin: auto;
-      display: float;
-      width: auto;
-    }
-    .in-pollen {
-       margin: 0px 0px 0px 15px;
-       padding: 1px 0px 0px 0px;
-       float: left;
-       position: relative;
-       width: 125px;
-    }
-    .level0 {
-      color: grey;
-    }
-    .level1 {
-      color: green;
-    }
-    .level2 {
-      color: orange;
-    }
-    .level3 {
-      color: red;
-    }
-    .level4 {
-      color: red;
-    }
-    .levelicon {
-      --mdc-icon-size: 2em;
-    }
-    .no-pollens {
-      margin-left: 1.4em;
-    }
+      #tixpollenfr {
+        padding: 1em;
+      }
+      .ok-pollen {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+        gap: 0.6em;
+      }
+      .pollen-entry {
+        display: flex;
+        align-items: center;
+        gap: 0.5em;
+        font-size: 1em;
+      }
+      .badge {
+        width: 1em;
+        height: 1em;
+        border-radius: 50%;
+        background: gray;
+      }
+      .pollen-entry.level1 .badge { background: green; }
+      .pollen-entry.level2 .badge { background: orange; }
+      .pollen-entry.level3 .badge { background: red; }
+      .pollen-entry.level4 .badge { background: darkred; }
+      .no-pollen {
+        text-align: center;
+        color: var(--secondary-text-color);
+        font-style: italic;
+      }
     `;
   }
 }
-  
+
 customElements.define('tpollensfr-card', TPollensFRCard);
-  
-// Puts card into the UI card picker dialog
+
 (window).customCards = (window).customCards || [];
 (window).customCards.push({
   type: 'tpollensfr-card',
   name: 'France Pollens card',
   preview: true,
-  description: 'This Lovelace custom card displays pollen information provided by French networks of pollens.',
+  description: "Affiche les pollens présents dans votre région selon l'API Atmo France."
 });
