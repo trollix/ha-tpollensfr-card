@@ -2,7 +2,7 @@ const LitElement = Object.getPrototypeOf(customElements.get("ha-panel-lovelace")
 const html = LitElement.prototype.html;
 const css = LitElement.prototype.css;
 
-const CARD_VERSION = '0.5.0';
+const CARD_VERSION = '0.5.1';
 
 console.info(
   `%c  TPOLLENSFR-CARD  %c  Version ${CARD_VERSION}  `,
@@ -51,7 +51,7 @@ _getPollens(hass, sensor_name, above_level) {
   }
 
   const pollens = today.pollens || {};
-  console.log("TPollensFR: today.pollens =", pollens);
+  //console.log("TPollensFR: today.pollens =", pollens);
 
   Object.entries(pollens).forEach(([name, level]) => {
     if (parseInt(level, 10) >= above_level) {
@@ -62,7 +62,7 @@ _getPollens(hass, sensor_name, above_level) {
     }
   });
 
-  console.log("TPollensFR: pollens selected =", res);
+  //console.log("TPollensFR: pollens selected =", res);
   return res;
 }
 
@@ -86,7 +86,7 @@ _getPollens(hass, sensor_name, above_level) {
     if (!this.config || !this.hass) {
       return html``;
     }
-    console.log('tpollens_fr_pessac')
+    //console.log('tpollens_fr_pessac')
     const pollens = this._getPollens(this.hass, this.config.sensor_name, this.config.above_level);
     return html`
       <ha-card header="${this.config.title}">
