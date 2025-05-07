@@ -2,7 +2,7 @@ const LitElement = Object.getPrototypeOf(customElements.get("ha-panel-lovelace")
 const html = LitElement.prototype.html;
 const css = LitElement.prototype.css;
 
-const CARD_VERSION = '0.4.1';
+const CARD_VERSION = '0.5.0';
 
 console.info(
   `%c  TPOLLENSFR-CARD  %c  Version ${CARD_VERSION}  `,
@@ -35,23 +35,37 @@ class TPollensFRCard extends LitElement {
     };
   }
   
-  _getPollens(hass, sensor_name, above_level) {
-    var res = [];
+_getPollens(hass, sensor_name, above_level) {
+  const res = [];
+  const entity = hass.states[`sensor.${sensor_name}`];
 
-    if (typeof hass.states[`sensor.${sensor_name}`] != "undefined") {
-      const data1 = hass.states[`sensor.${sensor_name}`].attributes['risks'];
-      //console.log(data1);
-      Object.keys(data1 || {}).forEach(function (key) {
-        if ( parseInt(data1[key].level, 10) >= above_level ) {
-          res.push({
-            name: data1[key].pollenName,
-            concentration: "level" + data1[key].level,
-          });
-        }
-      });
-    }
+  if (!entity) {
+    console.warn("TPollensFR: sensor not found:", sensor_name);
     return res;
   }
+
+  const today = entity.attributes?.today;
+  if (!today) {
+    console.warn("TPollensFR: no 'today' data in attributes");
+    return res;
+  }
+
+  const pollens = today.pollens || {};
+  console.log("TPollensFR: today.pollens =", pollens);
+
+  Object.entries(pollens).forEach(([name, level]) => {
+    if (parseInt(level, 10) >= above_level) {
+      res.push({
+        name: name,
+        concentration: "level" + level,
+      });
+    }
+  });
+
+  console.log("TPollensFR: pollens selected =", res);
+  return res;
+}
+
   
   setConfig(config) {
     const defaultConfig = {
@@ -72,7 +86,7 @@ class TPollensFRCard extends LitElement {
     if (!this.config || !this.hass) {
       return html``;
     }
-    //console.log('pollens fr')
+    console.log('tpollens_fr_pessac')
     const pollens = this._getPollens(this.hass, this.config.sensor_name, this.config.above_level);
     return html`
       <ha-card header="${this.config.title}">
