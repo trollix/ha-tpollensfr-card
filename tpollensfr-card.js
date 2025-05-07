@@ -1,9 +1,9 @@
-// tpollensfr-card.js amélioré
+// tpollensfr-card.js amélioré avec icône dynamique
 const LitElement = Object.getPrototypeOf(customElements.get("ha-panel-lovelace"));
 const html = LitElement.prototype.html;
 const css = LitElement.prototype.css;
 
-const CARD_VERSION = '0.5.2';
+const CARD_VERSION = '0.5.3';
 
 console.info(
   `%c  TPOLLENSFR-CARD  %c  Version ${CARD_VERSION}  `,
@@ -57,8 +57,8 @@ class TPollensFRCard extends LitElement {
           ${pollens.length > 0
             ? html`<div class="ok-pollen">
                 ${pollens.map(p => html`
-                  <div class="pollen-entry level${p.level}">
-                    <div class="badge"></div>
+                  <div class="pollen-entry">
+                    <ha-icon icon="${this.config.icon}" class="levelicon level${p.level}"></ha-icon>
                     <span class="pollen-name">${p.name}</span>
                   </div>
                 `)}
@@ -90,16 +90,22 @@ class TPollensFRCard extends LitElement {
         gap: 0.5em;
         font-size: 1em;
       }
-      .badge {
-        width: 1em;
-        height: 1em;
-        border-radius: 50%;
-        background: gray;
+      .levelicon {
+        --mdc-icon-size: 24px;
+        color: gray;
       }
-      .pollen-entry.level1 .badge { background: green; }
-      .pollen-entry.level2 .badge { background: orange; }
-      .pollen-entry.level3 .badge { background: red; }
-      .pollen-entry.level4 .badge { background: darkred; }
+      .level1 {
+        color: green;
+      }
+      .level2 {
+        color: orange;
+      }
+      .level3 {
+        color: red;
+      }
+      .level4 {
+        color: darkred;
+      }
       .no-pollen {
         text-align: center;
         color: var(--secondary-text-color);
@@ -116,5 +122,5 @@ customElements.define('tpollensfr-card', TPollensFRCard);
   type: 'tpollensfr-card',
   name: 'France Pollens card',
   preview: true,
-  description: "Affiche les pollens présents dans votre région selon l'API Atmo France."
+  description: "Affiche les pollens présents dans votre région selon l’API Atmo France."
 });
