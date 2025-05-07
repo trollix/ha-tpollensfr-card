@@ -1,9 +1,9 @@
-// tpollensfr-card.js amélioré avec icône dynamique
+// tpollensfr-card.js avec couleurs officielles des niveaux 0 à 6
 const LitElement = Object.getPrototypeOf(customElements.get("ha-panel-lovelace"));
 const html = LitElement.prototype.html;
 const css = LitElement.prototype.css;
 
-const CARD_VERSION = '0.5.3';
+const CARD_VERSION = '0.5.5';
 
 console.info(
   `%c  TPOLLENSFR-CARD  %c  Version ${CARD_VERSION}  `,
@@ -37,8 +37,9 @@ class TPollensFRCard extends LitElement {
 
     const today = sensor.attributes?.today?.pollens || {};
     Object.entries(today).forEach(([name, level]) => {
-      if (parseInt(level, 10) >= above_level) {
-        pollens.push({ name, level });
+      const lvl = parseInt(level, 10);
+      if (lvl >= above_level) {
+        pollens.push({ name, level: lvl });
       }
     });
 
@@ -94,18 +95,14 @@ class TPollensFRCard extends LitElement {
         --mdc-icon-size: 24px;
         color: gray;
       }
-      .level1 {
-        color: green;
-      }
-      .level2 {
-        color: orange;
-      }
-      .level3 {
-        color: red;
-      }
-      .level4 {
-        color: darkred;
-      }
+      .level0 { color: #DDDDDD; }
+      .level1 { color: #50F0E6; }
+      .level2 { color: #50CCAA; }
+      .level3 { color: #F0E641; }
+      .level4 { color: #FF5050; }
+      .level5 { color: #960032; }
+      .level6 { color: #7D2181; }
+
       .no-pollen {
         text-align: center;
         color: var(--secondary-text-color);
